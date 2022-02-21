@@ -9,7 +9,7 @@ Hotkey <Esc> for vim - just press j quickly, <Esc> also work
 # Tmux
 If you wanna set tmux settings, install .tmux.conf and .tmux.conf.local and too create link in home directory with ln
  
-Tmux hotkeys
+### Tmux hotkeys
 
 Prefix - Ctrl-a
  
