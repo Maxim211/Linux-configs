@@ -1,6 +1,7 @@
 set mouse=a  " enable mouse
 set encoding=utf-8
 set number
+set relativenumber
 set noswapfile
 set scrolloff=7
 
@@ -22,7 +23,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
-
+Plug 'nanotee/sqls.nvim'
 
 " color schemas
 Plug 'morhetz/gruvbox'  " colorscheme gruvbox
@@ -157,7 +158,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer' }
+local servers = { 'pyright', 'rust_analyzer', 'sqls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -165,6 +166,7 @@ for _, lsp in ipairs(servers) do
       debounce_text_changes = 150,
     }
   }
+
 end
 EOF
 

@@ -1,12 +1,16 @@
 set number
 set relativenumber
 set cursorline
+set scrolloff=7
 
 " unable syntax
 syntax on
 " set tab = 4 space
 set tabstop=4
 set softtabstop=4
+set expandtab
+
+set clipboard=unnamed
 
 set autoindent
 
