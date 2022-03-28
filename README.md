@@ -16,7 +16,7 @@ You need run `npm i -g pyright` for python lsp server, for SQL lsp server need r
 
 gd - if you are on the function, you can go to its definition
 
-:tabnew file - for open file in nee tab
+:tabnew file - for open file in new tab
 
 gt, gp, gw - for move next and previous between files and gw for close file
 
