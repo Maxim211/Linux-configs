@@ -1,12 +1,6 @@
 # Linux-configs
 Its my list configs linux console programs
 
-# Vim
-If you wanna set vim settings, at first intall .vimrc to your directory, then install vim-plug and create link to home directory with ln.
-Run vim and write :PlugInstall.
-
-Hotkey \<Esc\> for vim - just press j quickly, \<Esc\> also work
-
 # NeoVim
 If you wanna set neovim settings, at first intall init.vim to ~/.config/nvim/init.vim, then install vim plug for neovim.
 Run nvim and write :PlugInstall.
