@@ -50,8 +50,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,                 xK_Return), sendMessage NextLayout)
 
     -- Move focus
-    , ((modm,                 xK_j),      windows W.focusDown)
-    , ((modm,                 xK_k),      windows W.focusUp)
+    , ((modm,                 xK_f),      windows W.focusDown)
+    , ((modm,                 xK_d),      windows W.focusUp)
 
     -- Swap the focused window
     , ((modm .|. shiftMask,   xK_j),      windows W.swapDown)
@@ -83,7 +83,7 @@ myConfig = def
     }
 
 mySpacing :: Integer -> l a -> ModifiedLayout Spacing l a
-mySpacing i = spacingRaw False (Border 0 i 0 i) True (Border i 0 i 0) True
+mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
 tall = renamed [Replace "Tall"]
        $ mySpacing 15
