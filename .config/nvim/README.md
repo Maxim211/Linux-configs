@@ -9,6 +9,6 @@ gd - if you are on the function, you can go to its definition
 
 :tabnew file - for open file in new tab
 
-gt, gp, gw - for move next and previous between files and gw for close file
+gn, gp, gw - for move next and previous between files and gw for close file
 
-ctrl-space - for autocomplite
+C-<Space> - for autocomplite
