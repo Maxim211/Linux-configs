@@ -271,8 +271,10 @@ command! -bang -complete=buffer -nargs=? Bclose call <SID>Bclose(<q-bang>, <q-ar
 nnoremap <silent> <Leader>bd :Bclose<CR>
 
 
-map gn :bn<cr>
-map gp :bp<cr>
+map ]b :bnext<cr>
+map [b :bprevious<cr>
+map ]B :bfirst<cr>
+map [B :blast<cr>
 map gw :Bclose<cr>
 
 set colorcolumn=79
