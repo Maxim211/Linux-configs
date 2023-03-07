@@ -1,0 +1,61 @@
+#!/usr/bin/python
+
+import os
+import asyncio
+import aiohttp
+
+
+DOWNLOAD_DIR = '/home/mega_salo/.wallpapers'
+try: os.mkdir(DOWNLOAD_DIR)
+except: ...
+
+exiting_wallpapers = set()
+for subdir in os.listdir(DOWNLOAD_DIR):
+    path = DOWNLOAD_DIR+'/'+subdir+'/'
+    exiting_wallpapers |= {path+wal for wal in os.listdir(path)}
+
+
+def get_ext(url):
+    ext = url.split('wallhaven-')[1]
+    return ext
+
+async def download_wallpaper(session: aiohttp.ClientSession, collection, url):
+    download_path = f'{DOWNLOAD_DIR}/{collection}/{get_ext(url)}'
+    if download_path in exiting_wallpapers:
+        exiting_wallpapers.remove(download_path)
+        return
+    async with session.get(url, allow_redirects=True) as res:
+        path = open(download_path, 'wb')
+        await asyncio.to_thread(path.write, await res.content.read())
+        print(f'Download {download_path}')
+
+
+USER = os.environ['WALLHAVEN_USER']
+category = tuple[str, int]
+async def user_categories(session: aiohttp.ClientSession) -> list[category]:
+    url = f'https://wallhaven.cc/api/v1/collections/{USER}'
+    async with session.get(url) as res:
+        response = (await res.json())['data']
+        categories = []
+        for category in response:
+            if category['count'] == 0: continue
+            name = category['label'].replace(' ', '-')
+            try: os.mkdir(DOWNLOAD_DIR+'/'+name)
+            except: ...
+            categories.append((name, category['id']))
+        return categories
+
+async def download_category_wallpapers(session: aiohttp.ClientSession, category: category):
+    url = f'https://wallhaven.cc/api/v1/collections/{USER}/{category[1]}'
+    async with session.get(url) as res:
+        response = (await res.json())['data']
+        wallpapers = (download_wallpaper(session, category[0], res['path']) for res in response)
+        await asyncio.gather(*wallpapers)
+
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        for category in await user_categories(session):
+            await download_category_wallpapers(session, category)
+    [os.remove(wal) for wal in exiting_wallpapers]
+asyncio.run(main())

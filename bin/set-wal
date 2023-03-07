@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+W=$(ls ~/.wallpapers/)
+complete -W "${W}" 'set-wal'
+
+wallpaper=$(find ~/.wallpapers/$1 -follow -type f | shuf -n 1)
+wal -i $wallpaper -n &
+W=$(convert $wallpaper -print "%w\n" /dev/null)
+H=$(convert $wallpaper -print "%h\n" /dev/null)
+if [ $[ $W*100/$H ] -lt $[ 1600/9 ] ]; then
+    feh --bg-fill $wallpaper
+else
+    feh --bg-max $wallpaper
+fi &
+python ~/bin/wal.py
+xrdb -merge ~/.Xresources
+xdotool key shift+alt+F5
+wal-telegram -g &
