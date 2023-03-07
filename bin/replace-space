@@ -1,0 +1,12 @@
+#!/bin/sh
+S=""
+for C in $(ls -p); do
+    if [$(expr index $C \'1) == 1]; then
+        S=$(C:1:)
+    elif [$S != ""]; then
+        if [$(expr index $C \'1) == ${#C}]; then
+            S="$S_$(C::${#C})"
+        else
+            S="$S_$C"
+    fi
+done 2> /dev/null
