@@ -20,7 +20,7 @@ inoremap jj <esc>
 call plug#begin('~/.vim/plugged')
 
 " Color schemes
-Plug 'altercation/vim-colors-solarized'
+Plug 'tanvirtin/monokai.nvim'
 Plug 'dylanaraps/wal.vim'
 
 " Discord Rich presence
@@ -30,11 +30,11 @@ call plug#end()
 
 set notermguicolors
 colorscheme wal
+
 syntax on
 
-" set background=dark
-" set termguicolors
-" colorscheme solarized
+" colorscheme monokai
+" :lua require('monokai').setup { italics = false }
 
 " turn off search highlight
 nnoremap ,<space> :nohlsearch<CR>
